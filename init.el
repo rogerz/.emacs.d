@@ -41,8 +41,22 @@
 (add-hook 'js3-mode-hook
 	  (lambda () (flymake-mode t)))
 
+;; sr-speedbar
+(require 'sr-speedbar)
+
 ;; PATH
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
-(setq exec-path
-      '(
-	"/usr/local/share/npm/bin"))
+(setq exec-path (append exec-path
+      '("/usr/local/share/npm/bin")))
+
+;; yasnippet
+(require 'yasnippet)
+(yas-reload-all)
+(add-hook 'prog-mode-hook
+	  '(lambda ()
+	     (yas-minor-mode)))
+
+;; angular-snippets
+(require 'angular-snippets)
+(eval-after-load "sgml-mode"
+  '(define-key html-mode-map (kbd "C-c C-d") 'ng-snip-show-docs-at-point))
